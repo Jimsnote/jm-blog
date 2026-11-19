@@ -116,3 +116,11 @@ jm-blog/
     ├── styles/global.css     # 明暗主题 CSS 变量与排版
     └── utils/blog.ts         # 排序、日期格式化
 ```
+
+---
+
+## 线上信息（2026-11-19 更新）
+
+- 正式地址：https://jm-blog-zeta.vercel.app
+- 仓库：https://github.com/Jimsnote/jm-blog
+- 流程：push 到 `master` → Vercel 自动构建并发布（已接通，无需手动部署）
