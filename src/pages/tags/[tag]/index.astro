@@ -1,0 +1,25 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { getPublishedPosts, formatDate } from '../../../utils/blog';
+
+export async function getStaticPaths() {
+  const posts = await getPublishedPosts();
+  const tags = [...new Set(posts.flatMap((post) => post.data.tags))];
+  return tags.map((tag) => ({
+    params: { tag },
+    props: { tag, posts: posts.filter((post) => post.data.tags.includes(tag)) }
+  }));
+}
+const { tag, posts } = Astro.props;
+---
+<Base title={`标签：${tag}`} description={`标签「${tag}」下的全部文章。`}>
+  <h1 style="font-size:26px; margin:48px 0 8px;">#{tag}</h1>
+  <ul class="post-list">
+    {posts.map((post) => (
+      <li>
+        <a class="title" href={`/blog/${post.id}/`}>{post.data.title}</a>
+        <div class="meta">{formatDate(post.data.date)}</div>
+      </li>
+    ))}
+  </ul>
+</Base>
